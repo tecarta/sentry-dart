@@ -52,16 +52,11 @@ dev_dependencies:
   platform: ^3.1.6
 flutter:
   plugin:
+    # Tecarta fork: web and desktop only. The app reports to Crashlytics on
+    # iOS and Android and never starts Sentry there, so its native SDKs
+    # (sentry-cocoa, sentry-android) are not linked into those apps at all.
+    # SentryFlutter.init must not be called on android, ios or macos.
     platforms:
-      android:
-        pluginClass: SentryFlutterPlugin
-        package: io.sentry.flutter
-      ios:
-        pluginClass: SentryFlutterPlugin
-        sharedDarwinSource: true
-      macos:
-        pluginClass: SentryFlutterPlugin
-        sharedDarwinSource: true
       web:
         pluginClass: SentryFlutterWeb
         fileName: sentry_flutter_web.dart
